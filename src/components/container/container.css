@@ -1,0 +1,7 @@
+.Categories {
+    display: flex;
+    flex-wrap: wrap;
+}
+.mens,.womens {
+    flex-grow: 1.5;
+}
