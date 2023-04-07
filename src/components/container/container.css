@@ -1,7 +1,10 @@
-.Categories {
+.categories-container {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-}
+    justify-content: space-between;
+    grid-column: span 2;
+  }
 .mens,.womens {
     flex-grow: 1.5;
 }

@@ -1,40 +1,17 @@
-
-import './App.css';
-import Container from './components/container/container';
-export const categories = [
-  {
-    "id": 1,
-    "title": "hats",
-    "imageUrl": "https://i.ibb.co/cvpntL1/hats.png"
-  },
-  {
-    "id": 2,
-    "title": "jackets",
-    "imageUrl": "https://i.ibb.co/px2tCc3/jackets.png"
-  },
-  {
-    "id": 3,
-    "title": "sneakers",
-    "imageUrl": "https://i.ibb.co/0jqHpnp/sneakers.png"
-  },
-  {
-    "id": 4,
-    "title": "womens",
-    "imageUrl": "https://i.ibb.co/GCCdy8t/womens.png"
-  },
-  {
-    "id": 5,
-    "title": "mens",
-    "imageUrl": "https://i.ibb.co/R70vBrQ/men.png"
-  }
-];
+import Home from './routes/home/home';
+import { Routes,Route } from 'react-router-dom';
+import Navbar from './components/Navbar/navbar';
+import Signin from './routes/SignIn/signin';
 function App() {
   return (
-    <div className="App">
-      <Container/>
-    </div>
-  );
-}
-
+    <Routes>
+      <Route path='/' element={<Navbar/>}>
+        <Route index element={<Home/>}/>
+        <Route path='shop' element={<h1>HI</h1>}/>
+        <Route path='signIn' element={<Signin/>}/>
+      </Route>
+    </Routes>
+  )
+};
 export default App;
 

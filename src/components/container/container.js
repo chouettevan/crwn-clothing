@@ -1,9 +1,9 @@
-import { categories } from "../../App";
+
 import Category from "../category/category";
 import './container.css';
-const Container = () => {
+const Container = ({ categories }) => {
     return (
-    <div className="Categories">
+    <div className="categories-container">
         {categories.map(product => <Category category={product} key={product.id}/>)}
       </div>
     )
