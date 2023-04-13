@@ -1,7 +1,7 @@
 import Home from './routes/home/home';
 import { Routes,Route } from 'react-router-dom';
 import Navbar from './components/Navbar/navbar';
-import Signin from './routes/SignIn/signin';
+import Signin from './routes/Auth/authentication';
 function App() {
   return (
     <Routes>
