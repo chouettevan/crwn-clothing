@@ -2,10 +2,11 @@ import {
     createEmailPasswordAuth,
     signInWithGooglePopup,
     createUserDocument,
-    emailPasswordSignIn } from "../../utillities/firebase/firebase";
+    emailPasswordSignIn } from "../../utillities/Firebase/firebase";
 import Form from "../../components/Form/form";
 import Button from "../../components/Button/button";
 import './auth.scss';
+
 const signUpfields = [
     {label:'Display Name',type:'text',id:1},
     {label:'Email',type:'email',id:2},
@@ -17,11 +18,14 @@ const signInfields = [
     {label:'Password',type:'password',id:2}
 ];
 const Signin = () => {
+
+    
     const logGoogleUser = async () => {
         const { user } = await signInWithGooglePopup();
-        const userDocRef = await createUserDocument(user);
-        console.log(userDocRef);
+        await createUserDocument(user);
     };
+    
+    
     const signUp = async ({ displayName,email,password,confirmPassword }) => {
         if (password !== confirmPassword){
             alert('Passwords do not match');
@@ -32,6 +36,7 @@ const Signin = () => {
                 email,
                 password);
                 await createUserDocument(user,{ displayName });
+
         } catch (error) {
             if (error.code ==='auth/email-already-in-use') {
                 alert('cannot create user,email already in use');
@@ -43,10 +48,12 @@ const Signin = () => {
         }
         return true;
     };
+    
+    
     const signIn = async ({ email,password }) => {
         try {
-            const response = await emailPasswordSignIn(email,password);
-            console.log(response);
+            await emailPasswordSignIn(email,password);
+
         } catch (err) {
             switch (err.code) {
                 case 'auth/wrong-password':
@@ -58,8 +65,12 @@ const Signin = () => {
                 default:
                     console.log(err); 
             }
+            return false;
         }
+        return true;
     };
+    
+    
     return (
         <div className="signin-route">
             <h1>Sign In</h1>

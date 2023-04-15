@@ -8,7 +8,7 @@ function App() {
       <Route path='/' element={<Navbar/>}>
         <Route index element={<Home/>}/>
         <Route path='shop' element={<h1>HI</h1>}/>
-        <Route path='signIn' element={<Signin/>}/>
+        <Route path='auth' element={<Signin/>}/>
       </Route>
     </Routes>
   )
