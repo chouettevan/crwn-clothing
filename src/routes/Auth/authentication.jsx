@@ -1,5 +1,5 @@
 import { 
-    createEmailPasswordAuth,
+    emailPasswordSignUp,
     signInWithGooglePopup,
     createUserDocument,
     emailPasswordSignIn } from "../../utillities/Firebase/firebase";
@@ -32,7 +32,7 @@ const Signin = () => {
             return false;
         }
         try {
-            const { user } = await createEmailPasswordAuth(
+            const { user } = await emailPasswordSignUp(
                 email,
                 password);
                 await createUserDocument(user,{ displayName });
@@ -46,6 +46,7 @@ const Signin = () => {
             console.log(error);
             return false;
         }
+        //reset form fields if succsessful
         return true;
     };
     
@@ -67,6 +68,7 @@ const Signin = () => {
             }
             return false;
         }
+        //reset form fields if successful
         return true;
     };
     
@@ -77,7 +79,7 @@ const Signin = () => {
             <div className="signin form">
                 <h2>I already have an account</h2>
                 <span>Sign in with your email and password</span>
-                <Form fields={signInfields} onSubmit={signIn} submit='Sign In'>
+                <Form fields={signInfields}  onSubmit={signIn} submit='Sign In'>
                     <Button  type='button' className='google' onClick={logGoogleUser}>
                         Google Sign In
                     </Button> 

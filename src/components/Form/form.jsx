@@ -9,6 +9,7 @@ const Form = ({ fields,onSubmit,submit,children }) => {
     const submitHandler = async event => {
         event.preventDefault();
         const values = {};
+        //extracting form  input values from the event
         for (let i of event.target) {
             if (i.localName === 'input') {
                 values[i.name] = i.value;
