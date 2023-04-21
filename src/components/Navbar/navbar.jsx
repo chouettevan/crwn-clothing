@@ -1,17 +1,15 @@
 import { Outlet,Link } from 'react-router-dom'
-import { Fragment,useContext,useState } from 'react';
+import { Fragment,useContext } from 'react';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { UserContext } from '../../Contexts/user';
 import { signOutUser } from '../../utillities/Firebase/firebase';
+import { CartContext } from '../../Contexts/cart';
 import Dropdown from '../Cart-dropdown/dropdown';
 import './navbar.scss';
 import CartIcon from '../cart-icon/icon';
 const Navbar = () => {
     const { currentUser } = useContext(UserContext);
-    const [ isCartOpen,setIsCartOpen ] = useState(false);
-    const toggleDropdown = () => {
-        setIsCartOpen(!isCartOpen);
-    };
+    const { isCartOpen } = useContext(CartContext);
     return (
         <Fragment>
             <div className='navigation'>
@@ -28,7 +26,7 @@ const Navbar = () => {
                        SIGN IN
                    </Link> 
                    }
-                    <CartIcon onClick={toggleDropdown}/>
+                    <CartIcon />
                 </div>
                 {isCartOpen && <Dropdown/>}
             </div>

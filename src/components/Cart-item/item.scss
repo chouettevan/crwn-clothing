@@ -1,0 +1,17 @@
+.item-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-gap:20px;
+    font-size: 20px;
+    img {
+        width:80%;
+    }
+    .item-details {
+        display: flex;
+        flex-direction: column;
+        .price {
+            font-size: 19px;
+        }
+    }
+}
