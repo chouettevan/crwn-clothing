@@ -1,6 +1,5 @@
 import './item.scss';
 const CartItem = ({ product:{ name,quantity,imageUrl,price } }) => {
-    console.log({ name,quantity,imageUrl,price })
     return (
         <div className='item-container'>
             <img src={imageUrl} alt={name}/>

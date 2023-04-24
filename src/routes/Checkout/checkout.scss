@@ -1,0 +1,23 @@
+.checkout {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    column-gap:30px;
+    margin: 0;
+    padding: 0;
+    .header {
+        display: grid;
+        grid-template-columns: repeat(4,2fr) 1fr;
+        gap:30px;
+        font-size: 25px;
+        span {
+            text-align: center;
+        }
+
+    }
+    .cart  {
+        border-bottom:1px solid darkgray;
+        padding-bottom: 20px;
+    }
+
+}
