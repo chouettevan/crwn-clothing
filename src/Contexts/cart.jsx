@@ -51,6 +51,7 @@ const CartReducer = (state,action) => {
 export const CartProvider = ({ children }) => {
     const [ { cartItems },dispatch ] = useReducer(CartReducer,{cartItems:[]});
     const [ isCartOpen,setIsCartOpen ] = useState(false);
-    const value = { cartItems,isCartOpen,dispatch,setIsCartOpen };
+    const editCart = (action,payload) => dispatch({type:action,payload})
+    const value = { cartItems,isCartOpen,editCart,setIsCartOpen };
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 };

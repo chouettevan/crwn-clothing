@@ -10,8 +10,8 @@ import {
 } from './styles';
 const Card = ({ product }) => {
     const {name,price,imageUrl} = product;
-    const { dispatch } = useContext(CartContext);
-    const addProductToCart = () => dispatch({type:ACTION_TYPES.add_item,payload:product});
+    const { editCart } = useContext(CartContext);
+    const addProductToCart = () => editCart(ACTION_TYPES.add_item,product)
     return (
         <CardContainer>
             <ProductImage src={imageUrl} alt={name}/>

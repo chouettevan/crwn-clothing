@@ -6,10 +6,10 @@ import {
 } from './styles'
 const Item = ({ product }) => {
     const { quantity,name,imageUrl,price } = product;
-    const { dispatch } = useContext(CartContext);
-    const Increment = () => dispatch({type:ACTION_TYPES.add_item,payload:product});
-    const Decrement = () => dispatch({type:ACTION_TYPES.remove_item,payload:product});
-    const Delete = () => dispatch({type:ACTION_TYPES.delete_item,payload:product}); 
+    const { editCart } = useContext(CartContext);
+    const Increment = () => editCart(ACTION_TYPES.add_item,product);
+    const Decrement = () => editCart(ACTION_TYPES.remove_item,product)
+    const Delete = () => editCart(ACTION_TYPES.delete_item,product)
     return (
         <CheckoutItem className="checkout-item">
             <img src={imageUrl} alt={name} width='100%'/>
