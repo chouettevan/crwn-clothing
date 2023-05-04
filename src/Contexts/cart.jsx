@@ -1,13 +1,8 @@
-import { createContext,useEffect,useState } from "react";
+import { createContext,useState,useReducer } from "react";
 export const CartContext = createContext({
     cartItems:[],
-    addItemToCart:() => {},
     isCartOpen:false,
     setIsCartOpen:() => {},
-    updateItemCount:() => {},
-    removeItem:() => {},
-    itemCount:0,
-    totalPrice:0
 });
 function addCartItem(cart,itemToAdd) {
     const existingItem = cart.find(cartItem => cartItem.id === itemToAdd.id);
@@ -23,42 +18,39 @@ function addCartItem(cart,itemToAdd) {
 
     return [...cart,{...itemToAdd,quantity:1}];
 }
+function removeItem(cart,item) {
+    if ( item.quantity === 1) {
+        return cart.filter(cartItem => cartItem.id !== item.id);
+    } else {
+        return cart.map(cartItem => 
+            cartItem.id === item.id ?
+            {...item,quantity:item.quantity - 1}
+            : cartItem
+            )
+    }
+}
+export const ACTION_TYPES = {
+    add_item:"ADD_ITEM",
+    remove_item:"REMOVE_ITEM",
+    delete_item:"DELETE_ITEM"
+}
+const CartReducer = (state,action) => {
+    const { type,payload } = action;
+    const { cartItems } = state;
+    switch (type) {
+        case "ADD_ITEM":
+            return { cartItems:addCartItem(cartItems,payload) };
+        case "REMOVE_ITEM":
+            return { cartItems:removeItem(cartItems,payload) };
+        case "DELETE_ITEM":
+            return { cartItems:cartItems.filter(item => item.id !== payload.id) };
+        default:
+            throw new Error(`unhandled action type ${type} in Cart Reducer`);
+    }
+};
 export const CartProvider = ({ children }) => {
-    const [ cartItems,setCartItems ] = useState([]);
+    const [ { cartItems },dispatch ] = useReducer(CartReducer,{cartItems:[]});
     const [ isCartOpen,setIsCartOpen ] = useState(false);
-    const [ itemCount,setItemCount ] = useState(0);
-    const [ totalPrice,setTotalPrice ] = useState(0);
-    const addItemToCart = cartItem => {
-        setCartItems(addCartItem(cartItems,cartItem));
-    };
-    useEffect(() => {
-        let newItemCount = 0;
-        for (let i of cartItems) {
-            newItemCount += i.quantity;
-        }
-        setItemCount(newItemCount);
-    },[cartItems]);
-    useEffect(() => {
-        let newTotalPrice = 0;
-        for (let i of cartItems) {
-            newTotalPrice += i.quantity * i.price;
-        }
-        setTotalPrice(newTotalPrice);
-    },[cartItems]);
-    const updateItemCount = (item,countUpdate) => {
-        if (item.quantity + countUpdate <= 0) {
-            removeItem(item);
-            return;
-        }
-        setCartItems(cartItems.map(element => 
-            item.id === element.id & item.quantity > -countUpdate
-            ? {...element,quantity:element.quantity + countUpdate}
-            : element
-        ))
-    }
-    const removeItem = item => {
-        setCartItems(cartItems.filter(element => element.id !== item.id));
-    }
-    const value = { cartItems,addItemToCart,isCartOpen,setIsCartOpen,updateItemCount,removeItem,itemCount,totalPrice };
+    const value = { cartItems,isCartOpen,dispatch,setIsCartOpen };
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 };

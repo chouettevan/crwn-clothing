@@ -1,9 +1,17 @@
 import { CartContext } from "../../Contexts/cart";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Item from "../../Components/Checkout-item/item";
 import { CheckoutPage,Header,Cart } from "./styles";
 const Checkout = () => {
-    const { totalPrice,cartItems } = useContext(CartContext);
+    const { cartItems } = useContext(CartContext);
+    const [ price,setPrice ] = useState(0);
+    useEffect(() => {
+        let newPrice = 0;
+        for (let i of cartItems) {
+            newPrice += i.quantity * i.price;
+        }
+        setPrice(newPrice);
+    },[cartItems]);
     return (
         <CheckoutPage >
             <Header>
@@ -16,7 +24,7 @@ const Checkout = () => {
             <Cart>
                 {cartItems.map(product => <Item product={product}/>)}
             </Cart>
-            {totalPrice ? <h2>total:{totalPrice}$</h2> : null}
+            {price ? <h2>total:{price}$</h2> : null}
         </CheckoutPage>
     );
 };

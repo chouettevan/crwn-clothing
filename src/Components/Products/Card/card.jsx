@@ -1,6 +1,6 @@
 import Button from '../../Button/button'
 import { useContext } from 'react';
-import { CartContext } from '../../../Contexts/cart';
+import { CartContext,ACTION_TYPES } from '../../../Contexts/cart';
 import {
     ProductImage,
     CardContainer,
@@ -10,13 +10,13 @@ import {
 } from './styles';
 const Card = ({ product }) => {
     const {name,price,imageUrl} = product;
-    const { addItemToCart } = useContext(CartContext);
-    const addProductToCart = () => addItemToCart(product);
+    const { dispatch } = useContext(CartContext);
+    const addProductToCart = () => dispatch({type:ACTION_TYPES.add_item,payload:product});
     return (
         <CardContainer>
             <ProductImage src={imageUrl} alt={name}/>
             <Footer>
-                <Name >{name}</Name>
+                <Name>{name}</Name>
                 <Price>{price}$</Price>
             </Footer>
             <Button $inverted onClick={addProductToCart}>Add to Cart</Button>

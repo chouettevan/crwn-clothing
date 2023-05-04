@@ -1,4 +1,4 @@
-import { CartContext } from "../../Contexts/cart";
+import { CartContext,ACTION_TYPES } from "../../Contexts/cart";
 import { useContext } from "react";
 import {
     CheckoutButton,
@@ -6,10 +6,10 @@ import {
 } from './styles'
 const Item = ({ product }) => {
     const { quantity,name,imageUrl,price } = product;
-    const { updateItemCount,removeItem } = useContext(CartContext);
-    const Increment = () => updateItemCount(product,1);
-    const Decrement = () => updateItemCount(product,-1);
-    const Delete = () => removeItem(product); 
+    const { dispatch } = useContext(CartContext);
+    const Increment = () => dispatch({type:ACTION_TYPES.add_item,payload:product});
+    const Decrement = () => dispatch({type:ACTION_TYPES.remove_item,payload:product});
+    const Delete = () => dispatch({type:ACTION_TYPES.delete_item,payload:product}); 
     return (
         <CheckoutItem className="checkout-item">
             <img src={imageUrl} alt={name} width='100%'/>
