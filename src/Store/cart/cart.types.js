@@ -1,0 +1,6 @@
+export const CART_ACTION_TYPES = {
+    ADD_ITEM:"cart/ADD_ITEM",
+    REMOVE_ITEM:"cart/REMOVE_ITEM",
+    DELETE_ITEM:"cart/DELETE_ITEM",
+    TOGGLE_CART:"cart/TOGGLE_CART"
+};

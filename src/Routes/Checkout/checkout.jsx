@@ -1,17 +1,10 @@
-import { CartContext } from "../../Contexts/cart";
-import { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { cartItemsSelector,totalPriceSelector } from "../../Store/cart/cart.selectors";
 import Item from "../../Components/Checkout-item/item";
 import { CheckoutPage,Header,Cart } from "./styles";
 const Checkout = () => {
-    const { cartItems } = useContext(CartContext);
-    const [ price,setPrice ] = useState(0);
-    useEffect(() => {
-        let newPrice = 0;
-        for (let i of cartItems) {
-            newPrice += i.quantity * i.price;
-        }
-        setPrice(newPrice);
-    },[cartItems]);
+    const cartItems = useSelector(cartItemsSelector);
+    const price = useSelector(totalPriceSelector)
     return (
         <CheckoutPage >
             <Header>
@@ -22,7 +15,7 @@ const Checkout = () => {
                 <span>Remove</span>
             </Header>
             <Cart>
-                {cartItems.map(product => <Item product={product}/>)}
+                {cartItems.map(product => <Item product={product} key={product.id}/>)}
             </Cart>
             {price ? <h2>total:{price}$</h2> : null}
         </CheckoutPage>

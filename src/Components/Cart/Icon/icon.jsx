@@ -1,21 +1,15 @@
 import { Bag,IconContainer,ItemCount } from './styles';
-import { useContext, useEffect, useState } from 'react';
-import { CartContext } from '../../../Contexts/cart';
+import { useDispatch,useSelector } from 'react-redux';
+import { cartCountSelector } from '../../../Store/cart/cart.selectors';
+import { toggleCart } from '../../../Store/cart/cart.actions';
 const CartIcon = () => {
-    const { setIsCartOpen,isCartOpen,cartItems } = useContext(CartContext);
-    const [ count,setCount ] = useState(0);
-    useEffect(() => {
-        let newCount = 0;
-        for (let i of cartItems) {
-            newCount += i.quantity;
-        }
-        setCount(newCount);
-    },[cartItems]);
-    const toggle = () => setIsCartOpen(!isCartOpen);
+    const count = useSelector(cartCountSelector);
+    const dispatch = useDispatch();
+    const toggle = () => dispatch(toggleCart());
     return (
     <IconContainer onClick={toggle}>
         <Bag/>
-        <ItemCount>{count|| 0}</ItemCount>
+        <ItemCount>{count || 0}</ItemCount>
     </IconContainer>
     );
 };

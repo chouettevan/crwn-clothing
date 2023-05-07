@@ -1,9 +1,10 @@
-import { Fragment, useContext } from "react";
-import { ProductContext } from "../../Contexts/product";
-import Container from "../../Components/Products/Container/container";
+import { Fragment } from "react";
+import Container from "../../../Components/Products/Container/container";
 import { Link } from "react-router-dom";
-const Shop = () => {
-    const { products } = useContext(ProductContext);
+import { useSelector } from "react-redux";
+import { productListSelector } from "../../../Store/products/products.selectors";
+const MainPage = () => {
+    const products = useSelector(productListSelector);
     return (
         <>
             <div className="products-preview">
@@ -24,4 +25,4 @@ const Shop = () => {
         );
 };
 
-export default Shop;
+export default MainPage;

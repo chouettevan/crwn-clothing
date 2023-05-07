@@ -28,7 +28,8 @@ const Form = ({ fields,onSubmit,buttonText,children}) => {
         <FormContainer>
             <form onSubmit={submitHandler}>
                 {fields.map(({ id,...props })=> {
-                    return <FormInput key={id} reset={reset} {...props} required/>; 
+                    if (reset) props.value='';
+                    return <FormInput key={id}  {...props} required/>; 
                 })}
                 <Child $isGoogleButton={isGoogleButton}>
                     <Button type='submit'>

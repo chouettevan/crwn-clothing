@@ -1,15 +1,15 @@
-import { CartContext,ACTION_TYPES } from "../../Contexts/cart";
-import { useContext } from "react";
+import { useDispatch } from 'react-redux';
+import { addItemToCart,removeItemFromCart,deleteCartItem } from '../../Store/cart/cart.actions';
 import {
     CheckoutButton,
     CheckoutItem 
-} from './styles'
+} from './styles';
 const Item = ({ product }) => {
     const { quantity,name,imageUrl,price } = product;
-    const { editCart } = useContext(CartContext);
-    const Increment = () => editCart(ACTION_TYPES.add_item,product);
-    const Decrement = () => editCart(ACTION_TYPES.remove_item,product)
-    const Delete = () => editCart(ACTION_TYPES.delete_item,product)
+    const dispatch = useDispatch();
+    const Increment = () => dispatch(addItemToCart(product));
+    const Decrement = () => dispatch(removeItemFromCart(product));
+    const Delete = () => dispatch(deleteCartItem(product));
     return (
         <CheckoutItem className="checkout-item">
             <img src={imageUrl} alt={name} width='100%'/>

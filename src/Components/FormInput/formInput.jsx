@@ -1,11 +1,8 @@
 import { useState } from "react";
 // import './forminput.scss';
 import {Input,InputLabel,InputContainer} from './styles'
-const FormInput = ({label,reset,...props}) => {
+const FormInput = ({label,...props}) => {
     const [ value,setValue ] = useState('');  
-    if (reset) {
-        props.value = '';
-    }
     return (
         <InputContainer>
             <Input 
