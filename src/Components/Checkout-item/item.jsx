@@ -1,4 +1,5 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
+import { cartItemsSelector } from '../../Store/cart/cart.selectors';
 import { addItemToCart,removeItemFromCart,deleteCartItem } from '../../Store/cart/cart.actions';
 import {
     CheckoutButton,
@@ -6,10 +7,11 @@ import {
 } from './styles';
 const Item = ({ product }) => {
     const { quantity,name,imageUrl,price } = product;
+    const cartItems = useSelector(cartItemsSelector)
     const dispatch = useDispatch();
-    const Increment = () => dispatch(addItemToCart(product));
-    const Decrement = () => dispatch(removeItemFromCart(product));
-    const Delete = () => dispatch(deleteCartItem(product));
+    const Increment = () => dispatch(addItemToCart(cartItems,product));
+    const Decrement = () => dispatch(removeItemFromCart(cartItems,product));
+    const Delete = () => dispatch(deleteCartItem(cartItems,product));
     return (
         <CheckoutItem className="checkout-item">
             <img src={imageUrl} alt={name} width='100%'/>
