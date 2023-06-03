@@ -8,7 +8,7 @@ import {
   createUserDocument,
 } from '../../../Utils/Firebase/firebase';
 
-import { SignUpContainer } from './sign-up-form.styles';
+import { SignUpContainer } from './styles';
 
 const defaultFormFields = {
   displayName: '',

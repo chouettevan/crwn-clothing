@@ -8,7 +8,7 @@ import {
   signInWithGooglePopup,
 } from '../../../Utils/Firebase/firebase';
 
-import { SignInContainer, ButtonsContainer } from './sign-in-form.styles';
+import { SignInContainer, ButtonsContainer } from './styles';
 
 const defaultFormFields = {
   email: '',
