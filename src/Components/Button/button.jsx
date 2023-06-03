@@ -3,6 +3,7 @@ import styled,{ css } from 'styled-components';
 const googleStyles = css`
     background-color: #4285f4;
     color: white;
+    padding: 0px 15px;
     &:hover {
         background-color: #357ae8;
         border: none;
