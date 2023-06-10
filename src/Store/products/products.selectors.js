@@ -13,5 +13,9 @@ export const productListSelector = createSelector(
     },{})
 )
 
+export const isLoadingSelector = createSelector(
+    [selectProductReducer],
+    state => state.isLoading
+)
 
 
