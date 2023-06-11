@@ -2,14 +2,18 @@ import { Fragment } from "react";
 import Container from "../../../Components/Products/Container/container";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { productListSelector } from "../../../Store/products/products.selectors";
+import { productListSelector,isLoadingSelector } from "../../../Store/products/products.selectors";
+import Spinner from '../../../Components/Spinner/spinner';
 const MainPage = () => {
     const products = useSelector(productListSelector);
+    const isLoading = useSelector(isLoadingSelector);
     return (
         <>
             <div className="products-preview">
                 {
-                Object.keys(products).map(title => {
+                isLoading 
+                ? <Spinner/> 
+                :Object.keys(products).map(title => {
                     return (
                         <Fragment key={title}>
                             <Link to={`/shop/${title}`}>

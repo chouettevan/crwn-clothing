@@ -36,3 +36,6 @@ createAction(CART_ACTION_TYPES.EDIT_CART,
 
 export const toggleCart = () => 
 createAction(CART_ACTION_TYPES.TOGGLE_CART);
+
+export const cleanUpCart = () => 
+createAction(CART_ACTION_TYPES.EDIT_CART,[]);
